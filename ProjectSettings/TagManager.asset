@@ -3,7 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BgLayer
+  - GameLayer
+  - GroundLeft
+  - GroundMiddle
+  - GroundRight
+  - PlatformLeft
+  - PlatformMiddle
+  - PlatformRight
+  - Blank
+  - Health
+  - Coin
+  - Spikes
+  - Bomb
+  - Tiles
+  - CloudLayerFar
+  - CloudLayerMid
+  - CloudLayerNear
+  - CloudLayerClosest
   layers:
   - Default
   - TransparentFX
@@ -13,7 +31,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 
