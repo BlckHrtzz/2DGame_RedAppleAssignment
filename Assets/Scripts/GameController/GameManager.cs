@@ -17,22 +17,23 @@ public class GameManager : MonoBehaviour
     ParallaxEffectScript parallaxEffectScript;      //Reference for the corresponding Script.
     public DeathMenu deathMenuScript;               //Reference for the corresponding Script.
     public PauseMenu pauseMenuScript;               ////Reference for the corresponding Script.
-                                                    
-    float score;                                    
-    int highScore;                                  
-                                                    
-    [HideInInspector]                               
-    public int health;                              
-    [HideInInspector]                               
-    public int coin;                                
-    [HideInInspector]                               
-    public bool isPlayerDead;                       
-                                                     
+
+    float score;
+    int highScore;
+
+    public float starthealth = 150;
+    [HideInInspector]
+    public float health;
+    [HideInInspector]
+    public int coin;
+    [HideInInspector]
+    public bool isPlayerDead;
+
     public Text totalCoins;                         //Reference For corresponding text field.
     public Text scoreText;                          //Reference For corresponding text field.
     public Text highScoreText;                      //Reference For corresponding text field.
-    public Text healthText;                         //Reference For corresponding text field.
-                                                    
+    public Image currentHealthBar;                  //Reference For corresponding text field.
+
     int scoreToNextLevel;                           // Score to reach next Level or say Difficulty.
     [HideInInspector]
     public int currentDifficulty;
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
         parallaxEffectScript = GameObject.FindGameObjectWithTag(Tags.mainCamera).GetComponent<ParallaxEffectScript>();
         player = GameObject.FindGameObjectWithTag(Tags.player);
 
-        health = 100;
+        health = starthealth;
         coin = 0;
         score = 0;
         highScore = PlayerPrefs.GetInt("HighScore", highScore);
@@ -63,7 +64,6 @@ public class GameManager : MonoBehaviour
         totalCoins.text = coin.ToString();
         scoreText.text = "Score : " + score;
         highScoreText.text = "HighScore  : " + highScore;
-        healthText.text = health.ToString();
 
     }
 
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         score += Time.deltaTime * currentDifficulty;        //Increases the score in rscpect to current difficulty.
         //Debug.Log(score);
         scoreText.text = "Score : " + (int)score;           //For Displaying The score on UI.
-        
+
         //Condition To increase the dDifficulty.
         if (score > scoreToNextLevel)
         {
@@ -118,9 +118,9 @@ public class GameManager : MonoBehaviour
     public void HealthUpdate(int h)
     {
         health += h;
-        healthText.text = health.ToString();
+        currentHealthBar.fillAmount = health / starthealth;
     }
-    
+
     //Checks if Player is Dead.
     public bool IsPlayerDead()
     {
